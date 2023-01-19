@@ -1,4 +1,4 @@
-use ssz_rs::List;
+use ssz_rs::{Error, List};
 
 const COUNT: usize = 8;
 
@@ -10,10 +10,10 @@ fn main() {
         Ok(value) => value,
         Err(err) => {
             match err {
-                //ssz_rs::list::Error => print!("too short: {}", err),
-                //ssz_rs::Error::List(e) => print!("too short: {}", err)
+                Error::List(e) => match e {
+                    ssz_rs::list::Error::IncorrectLength { .. } => {}
+                }
             }
-            print!("{}", err);
             panic!("{}",err)
         },
     };
