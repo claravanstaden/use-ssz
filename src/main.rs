@@ -13,8 +13,11 @@ fn main() {
                 Error::List(e) => match e {
                     ssz_rs::list::Error::IncorrectLength { .. } => {}
                 }
-            }
-            panic!("{}",err)
+            };
+            match err {
+                Error::List(e) => println!("list error: {e}")
+            };
+            panic!("{:?}", err)
         },
     };
 }
